@@ -20,14 +20,14 @@
 
 @implementation MasterViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        return self;
-    }
-    return nil;
-}
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        return self;
+//    }
+//    return nil;
+//}
 
 - (void)awakeFromNib
 {
@@ -66,10 +66,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:@"Cell"];
-    }
+//    if (cell==nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+//                                      reuseIdentifier:@"Cell"];
+//    }
 
 
     FailedBankInfo *info = [self.failedBankInfos objectAtIndex:indexPath.row];

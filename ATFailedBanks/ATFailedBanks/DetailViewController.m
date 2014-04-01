@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "FailedBankInfo.h"
 
 @interface DetailViewController ()
 - (void)configureView;
@@ -30,9 +31,14 @@
 {
     // Update the user interface for the detail item.
 
+//    if (self.detailItem) {
+//        self.detailDescriptionLabel.text = [self.detailItem description];
+//    }
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
+        self.nameLabel.text = self.detailItem.name;
+        self.cityLabel.text = self.detailItem.city;
+        self.stateLabel.text = self.detailItem.state;
+            }
 }
 
 - (void)viewDidLoad

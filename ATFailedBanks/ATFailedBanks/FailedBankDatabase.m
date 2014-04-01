@@ -35,7 +35,7 @@ static FailedBankDatabase *_database;
 
 -(NSArray *)failedBankInfos {
     NSMutableArray *retval = [[NSMutableArray alloc] init];
-    NSString *query = @"SELECT id, name, city, state FROM failed_banks ORDER BY close_date DESC";
+    NSString *query = @"SELECT id, name, city, state, zip, closeDate, updatedDate FROM failed_banks";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(_database, [query UTF8String], -1, &statement, nil)
         == SQLITE_OK) {
@@ -44,11 +44,22 @@ static FailedBankDatabase *_database;
             char *nameChars = (char *) sqlite3_column_text(statement, 1);
             char *cityChars = (char *) sqlite3_column_text(statement, 2);
             char *stateChars = (char *) sqlite3_column_text(statement, 3);
+            int zip = sqlite3_column_int(statement, 4);
+            char *closeDateChars = (char *) sqlite3_column_text(statement, 5);
+            char *updatedDateChars = (char *) sqlite3_column_text(statement, 6);
             NSString *name = [[NSString alloc] initWithUTF8String:nameChars];
             NSString *city = [[NSString alloc] initWithUTF8String:cityChars];
             NSString *state = [[NSString alloc] initWithUTF8String:stateChars];
+            NSString *closeDateString =
+            [[NSString alloc] initWithUTF8String:closeDateChars];
+            NSString *updatedDateString =
+            [[NSString alloc] initWithUTF8String:updatedDateChars];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+            NSDate *closeDate = [formatter dateFromString:closeDateString];
+            NSDate *updatedDate = [formatter dateFromString:updatedDateString];
             FailedBankInfo *info = [[FailedBankInfo alloc]
-                                    initWithUniqueId:uniqueId name:name city:city state:state];
+                                    initWithUniqueId:uniqueId name:name city:city state:state zip:zip closeDate:closeDate updatedDate:updatedDate];
             [retval addObject:info];
             
         }

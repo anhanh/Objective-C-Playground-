@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@class FailedBankInfo;
 
-@property (strong, nonatomic) id detailItem;
+@interface DetailViewController : UITableViewController
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *zipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *closedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *updateLabel;
+
+@property (strong, nonatomic) FailedBankInfo *detailItem;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
