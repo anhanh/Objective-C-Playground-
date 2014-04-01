@@ -35,7 +35,7 @@ static FailedBankDatabase *_database;
 
 -(NSArray *)failedBankInfos {
     NSMutableArray *retval = [[NSMutableArray alloc] init];
-    NSString *query = @"SELECT id, name, city, state, zip, closeDate, updatedDate FROM failed_banks";
+    NSString *query = @"SELECT id, name, city, state, zip, close_date, updated_date FROM failed_banks ORDER BY name DESC";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(_database, [query UTF8String], -1, &statement, nil)
         == SQLITE_OK) {
@@ -64,6 +64,9 @@ static FailedBankDatabase *_database;
             
         }
         sqlite3_finalize(statement);
+    }
+    for (FailedBankInfo *info in retval) {
+        NSLog(@"%d: %@, %@, %@", info.uniqueId, info.name, info.city, info.state);
     }
     return retval;
     

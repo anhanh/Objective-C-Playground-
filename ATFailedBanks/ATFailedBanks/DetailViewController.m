@@ -38,6 +38,14 @@
         self.nameLabel.text = self.detailItem.name;
         self.cityLabel.text = self.detailItem.city;
         self.stateLabel.text = self.detailItem.state;
+        self.zipLabel.text = [NSString stringWithFormat:@"%d",self.detailItem.zip];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMMM dd, yyyy"];
+        //[_closedLabel setText:[formatter stringFromDate:details.closeDate]];
+        //[_updatedLabel setText:[formatter stringFromDate:details.updatedDate]];
+        self.closedLabel.text = [formatter stringFromDate:self.detailItem.closeDate];
+        self.updateLabel.text = [formatter stringFromDate:self.detailItem.updatedDate];
             }
 }
 
